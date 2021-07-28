@@ -59,10 +59,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     marginTop: 20,
+    color: "grey",
   },
   price: {
     fontSize: 20,
-    color: "black",
+    color: "orange",
     marginTop: 6,
   },
   button: {

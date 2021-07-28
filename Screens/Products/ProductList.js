@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     marginTop: 60,
     backgroundColor: "#f7f7f7",
     borderRadius: 10,
-    elevation: 2,
+    elevation: 6,
+    shadowColor: "red",
   },
 });
 
