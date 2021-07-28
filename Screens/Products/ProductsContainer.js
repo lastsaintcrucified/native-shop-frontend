@@ -4,11 +4,11 @@ import {
   Text,
   StyleSheet,
   ActivityLoader,
-  FlatList,
-  StatusBar,
   ScrollView,
   Dimensions,
 } from "react-native";
+import { SearchBar } from "react-native-elements";
+
 import ProductList from "./ProductList";
 const data = require("../../assets/products.json");
 let { width } = Dimensions.get("window");
@@ -23,6 +23,17 @@ const ProductsContainer = () => {
   }, []);
   return (
     <View style={styles.container}>
+      <SearchBar
+        placeholder="search..."
+        containerStyle={{
+          width: width - 20,
+          borderRadius: 10,
+          backgroundColor: "white",
+          borderColor: "black",
+        }}
+        inputContainerStyle={{ backgroundColor: "white", borderColor: "black" }}
+        // onChangeText={this.updateSearch}
+      />
       <Text>Products container</Text>
       <View style={styles.scroll}>
         <ScrollView>
