@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 import { ListItem, Icon, Avatar, Text } from "react-native-elements";
 let { width } = Dimensions.get("window");
 const FilteredProducts = ({ productsFiltered }) => {
   //   console.log("filter->", productsFiltered);
+
   return (
     <View style={styles.container}>
       <ScrollView>
         {productsFiltered.length > 0 ? (
-          productsFiltered.map((item) => (
-            <ListItem key={item.price}>
+          productsFiltered.map((item, index) => (
+            <ListItem key={index}>
               <Avatar source={{ uri: item.image }} />
               <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
@@ -28,6 +29,7 @@ const FilteredProducts = ({ productsFiltered }) => {
 const styles = StyleSheet.create({
   container: {
     width: width,
+    marginBottom: 200,
   },
 });
 

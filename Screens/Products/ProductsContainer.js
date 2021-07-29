@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import { SearchBar, Icon } from "react-native-elements";
+import Banner from "../../Shared/Banner";
 import FilteredProducts from "./FilteredProducts";
 
 import ProductList from "./ProductList";
@@ -19,6 +20,7 @@ const ProductsContainer = () => {
   const [fiteredProducts, setFilterdProducts] = useState([]);
   const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState("");
+
   useEffect(() => {
     setProducts(data);
     setFilterdProducts(data);
@@ -38,6 +40,7 @@ const ProductsContainer = () => {
         item.name.toLowerCase().includes(text.toLowerCase())
       )
     );
+
     // console.log(fiteredProducts);
   };
 
@@ -69,7 +72,8 @@ const ProductsContainer = () => {
         <FilteredProducts productsFiltered={fiteredProducts} />
       ) : (
         <View style={styles.scroll}>
-          <ScrollView>
+          <Banner />
+          <ScrollView style={{ marginTop: 200 }}>
             <View style={styles.list}>
               {products.map((item, index) => (
                 <ProductList key={index} item={item} />
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     width: width,
-    marginBottom: 200,
+    marginBottom: 130,
   },
   list: {
     flexDirection: "row",

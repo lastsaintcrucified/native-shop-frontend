@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   image: {
-    width: width / 2 - 30,
-    height: width / 2 - 50,
+    width: width / 2 - 40,
+    height: width / 2 - 60,
     marginTop: -120,
     position: "absolute",
     backgroundColor: "transparent",
@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 16,
-    marginTop: 20,
+    marginTop: 10,
     color: "grey",
   },
   price: {
     fontSize: 20,
-    color: "orange",
+    color: "#800000",
     marginTop: 6,
   },
   button: {

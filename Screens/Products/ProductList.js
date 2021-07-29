@@ -15,13 +15,14 @@ const ProductList = ({ item }) => {
 const styles = StyleSheet.create({
   container: {
     width: width / 2 - 10,
-    height: width / 1.7,
+    height: width / 1.9,
     margin: 5,
     marginTop: 60,
     backgroundColor: "#f7f7f7",
     borderRadius: 10,
-    elevation: 6,
-    shadowColor: "red",
+    elevation: 8,
+    borderColor: "#800000",
+    borderWidth: 1,
   },
 });
 
