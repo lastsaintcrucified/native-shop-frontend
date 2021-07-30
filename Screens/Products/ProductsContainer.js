@@ -10,25 +10,37 @@ import {
 import { SearchBar, Icon } from "react-native-elements";
 import Banner from "../../Shared/Banner";
 import FilteredProducts from "./FilteredProducts";
-
+import FilteredCatagory from "./FilteredCatagory";
 import ProductList from "./ProductList";
+
 const data = require("../../assets/products.json");
+const catagoryData = require("../../assets/catagories.json");
 let { width, height } = Dimensions.get("window");
 
 const ProductsContainer = () => {
   const [products, setProducts] = useState([]);
+  const [productsCat, setProductsCat] = useState([]);
   const [fiteredProducts, setFilterdProducts] = useState([]);
   const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState("");
+  const [active, setActive] = useState();
+  const [catagories, setCatagories] = useState([]);
+  const [initialState, setInitialState] = useState([]);
 
   useEffect(() => {
     setProducts(data);
     setFilterdProducts(data);
     setFocus(false);
+    setActive(-1);
+    setCatagories(catagoryData);
+    setInitialState(data);
     return () => {
       setProducts([]);
       setFocus();
       setFilterdProducts([]);
+      setActive();
+      setCatagories([]);
+      setInitialState([]);
     };
   }, []);
 
@@ -46,6 +58,15 @@ const ProductsContainer = () => {
 
   const handleClear = () => {
     setFocus(false);
+  };
+  //catagories
+  const changeCatagory = (cat) => {
+    if (cat === "all") {
+      setProductsCat(initialState);
+      setActive(-1);
+    } else {
+      setProductsCat(products.filter((item) => item.category.$oid === cat));
+    }
   };
 
   return (
@@ -72,12 +93,28 @@ const ProductsContainer = () => {
         <FilteredProducts productsFiltered={fiteredProducts} />
       ) : (
         <View style={styles.scroll}>
-          <Banner />
-          <ScrollView style={{ marginTop: 200 }}>
+          <ScrollView>
+            <Banner />
+            <FilteredCatagory
+              active={active}
+              catagories={catagories}
+              setActive={setActive}
+              changeCatagory={changeCatagory}
+            />
             <View style={styles.list}>
-              {products.map((item, index) => (
-                <ProductList key={index} item={item} />
-              ))}
+              {productsCat.length > 0 ? (
+                productsCat.map((item, index) => (
+                  <ProductList key={index} item={item} />
+                ))
+              ) : active !== -1 ? (
+                <Text style={styles.catText}>
+                  No Products found for this catagory!!
+                </Text>
+              ) : (
+                products.map((item, index) => (
+                  <ProductList key={index} item={item} />
+                ))
+              )}
             </View>
           </ScrollView>
         </View>
@@ -98,6 +135,7 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: "row",
     flexWrap: "wrap",
+    marginTop: 10,
   },
   searchContainer: {
     width: width - 20,
@@ -106,15 +144,22 @@ const styles = StyleSheet.create({
     marginTop: 0,
     backgroundColor: "grey",
     borderWidth: 1,
-    borderColor: "white",
-    borderBottomColor: "white",
-    borderTopColor: "white",
+    borderColor: "#f2f2f2",
+    borderBottomColor: "#f2f2f2",
+    borderTopColor: "#f2f2f2",
+    marginBottom: 5,
   },
   searchInputContainer: {
     backgroundColor: "white",
     padding: 0,
   },
   searchInput: { color: "black" },
+  catText: {
+    margin: 40,
+    color: "red",
+    fontWeight: "bold",
+    fontSize: 20,
+  },
 });
 
 export default ProductsContainer;
