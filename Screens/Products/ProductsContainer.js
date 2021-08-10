@@ -107,7 +107,11 @@ const ProductsContainer = (props) => {
             <View style={styles.list}>
               {productsCat.length > 0 ? (
                 productsCat.map((item, index) => (
-                  <ProductList key={index} item={item} />
+                  <ProductList
+                    key={index}
+                    item={item}
+                    navigation={props.navigation}
+                  />
                 ))
               ) : active !== -1 ? (
                 <Text style={styles.catText}>

@@ -9,17 +9,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Header />
-      <Main style={styles.container} />
+      <Main />
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: StatusBar.currentHeight + 60,
   },
 });

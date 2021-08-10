@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: StatusBar.currentHeight,
   },
   image: {
     width: 100,
