@@ -2,9 +2,12 @@ import React from "react";
 import { View, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
 let { width } = Dimensions.get("window");
-const ProductList = ({ item }) => {
+const ProductList = ({ item, navigation }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Product Detail", { item: item })}
+      style={styles.container}
+    >
       <View>
         <ProductCard {...item} />
       </View>

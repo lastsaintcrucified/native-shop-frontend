@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
 import { ListItem, Icon, Avatar, Text } from "react-native-elements";
 let { width } = Dimensions.get("window");
-const FilteredProducts = ({ productsFiltered }) => {
+const FilteredProducts = ({ productsFiltered, navigation }) => {
   //   console.log("filter->", productsFiltered);
 
   return (
@@ -10,7 +10,12 @@ const FilteredProducts = ({ productsFiltered }) => {
       <ScrollView>
         {productsFiltered.length > 0 ? (
           productsFiltered.map((item, index) => (
-            <ListItem key={index}>
+            <ListItem
+              key={index}
+              onPress={() =>
+                navigation.navigate("Product Detail", { item: item })
+              }
+            >
               <Avatar source={{ uri: item.image }} />
               <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
