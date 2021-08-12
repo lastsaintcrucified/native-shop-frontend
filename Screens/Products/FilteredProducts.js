@@ -16,7 +16,10 @@ const FilteredProducts = ({ productsFiltered, navigation }) => {
                 navigation.navigate("Product Detail", { item: item })
               }
             >
-              <Avatar source={{ uri: item.image }} />
+              <Avatar
+                source={{ uri: item.image }}
+                imageProps={{ resizeMode: "contain" }}
+              />
               <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
                 <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
