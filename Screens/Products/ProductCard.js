@@ -7,6 +7,9 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { connect } from "react-redux";
+import { addCart } from "../../redux/actions/cartAction";
+
 let { width } = Dimensions.get("window");
 
 const ProductCard = (props) => {
@@ -29,7 +32,11 @@ const ProductCard = (props) => {
       <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              props.addCart(props);
+            }}
+          >
             <Text style={styles.button}>Add</Text>
           </TouchableOpacity>
         </View>
@@ -73,4 +80,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductCard;
+const mapDispatchToProps = (dispatch) => ({
+  addCart: (product) => dispatch(addCart({ quantity: 1, product })),
+});
+export default connect(null, mapDispatchToProps)(ProductCard);
