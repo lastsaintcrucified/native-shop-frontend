@@ -23,7 +23,7 @@ const SingleProduct = (props) => {
           <Text h4>Item available: {item.countInStock}</Text>
         </View>
         <View style={styles.bottom}>
-          <Text h4Style={{ color: "orange" }} h4>
+          <Text h4Style={{ color: "red" }} h4>
             ${item.price}
           </Text>
           <Button
@@ -32,7 +32,7 @@ const SingleProduct = (props) => {
             disabled={item.countInStock <= 0}
             raised
             buttonStyle={{ borderColor: "white" }}
-            titleStyle={{ color: "red" }}
+            titleStyle={{ color: "blue" }}
           />
         </View>
       </View>
@@ -59,8 +59,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottom: {
-    width: width / 1.2,
+    width: width,
     display: "flex",
+    padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",
   },

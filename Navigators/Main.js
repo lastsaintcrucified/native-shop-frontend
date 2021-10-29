@@ -1,14 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Badge } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 //Stacks
 import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
 const Tab = createBottomTabNavigator();
-
-const Main = () => {
+var displayBadge = 0;
+const Main = ({ cartItems }) => {
+  var badgeValue = cartItems.length;
+  displayBadge = cartItems.length;
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -44,7 +48,15 @@ const Main = () => {
         component={CartNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="shopping-cart" color={color} size={30} />
+            <>
+              <Icon name="shopping-cart" color={color} size={30} />
+              <Badge
+                badgeStyle={styles.badge}
+                textStyle={styles.badgeText}
+                containerStyle={{ position: "absolute", right: 25, top: 8 }}
+                value={badgeValue}
+              />
+            </>
           ),
           headerShown: false,
         }}
@@ -72,5 +84,16 @@ const Main = () => {
     </Tab.Navigator>
   );
 };
-
-export default Main;
+const styles = StyleSheet.create({
+  badge: {
+    backgroundColor: "white",
+    borderColor: "red",
+  },
+  badgeText: {
+    color: "red",
+  },
+});
+const mapStateToProps = ({ cartItems }) => ({
+  cartItems: cartItems,
+});
+export default connect(mapStateToProps, null)(Main);

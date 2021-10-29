@@ -1,34 +1,74 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, ScrollView } from "react-native";
-import { Text, ListItem, Avatar } from "react-native-elements";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { Text, ListItem, Avatar, Button, Icon } from "react-native-elements";
+import { SwipeListView } from "react-native-swipe-list-view";
 import { connect } from "react-redux";
+import { clearCart, removeFromCart } from "../../redux/actions/cartAction";
+import CartItem from "./CartItem";
 var { height, width } = Dimensions.get("window");
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, clearCart, removeFromCart, navigation }) => {
+  var total = 0;
+  cartItems.forEach((element) => {
+    total = Math.round(total + element.product.price);
+    return total;
+  });
+  console.log(cartItems);
   return (
     <>
       {cartItems.length ? (
-        <View>
-          <ScrollView>
-            {cartItems.map((itm, i) => (
-              <ListItem key={i} bottomDivider>
-                <Avatar
-                  source={{
-                    uri: itm.product.image
-                      ? itm.product.image
-                      : "https://cdn.pixabay.com/photo/2016/07/23/12/54/box-1536798_1280.png",
-                  }}
-                />
-                <ListItem.Content>
-                  <ListItem.Title>{itm.product.name}</ListItem.Title>
-                  <ListItem.Subtitle>{itm.product.brand}</ListItem.Subtitle>
-                </ListItem.Content>
-                <Text style={{ alignSelf: "flex-end" }}>
-                  ${itm.product.price}
-                </Text>
-              </ListItem>
-            ))}
-          </ScrollView>
-        </View>
+        <>
+          <View>
+            <ScrollView>
+              <SwipeListView
+                data={cartItems}
+                renderItem={(itm) => <CartItem itm={itm} />}
+                renderHiddenItem={(data) => (
+                  <View style={styles.hiddenContainer}>
+                    <TouchableOpacity>
+                      <Icon
+                        raised
+                        name="trash"
+                        type="font-awesome"
+                        color="#f50"
+                        onPress={() => removeFromCart(data.item)}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                )}
+                disableRightSwipe={true}
+                previewOpenDelay={3000}
+                friction={1000}
+                tension={40}
+                leftOpenValue={75}
+                stopLeftSwipe={75}
+                rightOpenValue={-75}
+              />
+            </ScrollView>
+          </View>
+          <View style={styles.bottomLayer}>
+            <Text>${total}</Text>
+            <View style={styles.btnGrp}>
+              <Button
+                title="Clear"
+                type="clear"
+                titleStyle={styles.btn}
+                onPress={() => clearCart()}
+              />
+              <Button
+                title="Checkout"
+                type="clear"
+                titleStyle={styles.btn}
+                onPress={() => navigation.navigate("CheckOut")}
+              />
+            </View>
+          </View>
+        </>
       ) : (
         <View style={styles.empty}>
           <Text h4>Looks like the Cart is empty.</Text>
@@ -45,8 +85,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  bottomLayer: {
+    flexDirection: "row",
+    width: width,
+    justifyContent: "space-between",
+    position: "absolute",
+    padding: 5,
+    left: 0,
+    bottom: 0,
+    backgroundColor: "white",
+  },
+  btn: {
+    color: "red",
+  },
+  btnGrp: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  hiddenContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+});
+const mapDispatchToProps = (dispatch) => ({
+  clearCart: () => dispatch(clearCart()),
+  removeFromCart: (item) => dispatch(removeFromCart(item)),
 });
 const mapStateToProps = ({ cartItems }) => ({
   cartItems: cartItems,
 });
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
