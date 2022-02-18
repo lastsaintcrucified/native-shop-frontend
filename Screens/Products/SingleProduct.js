@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Image, View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { Text, Button } from "react-native-elements";
 let { width, height } = Dimensions.get("window");
+import { addCart } from "../../redux/actions/cartAction";
+import { connect } from "react-redux";
+
 const SingleProduct = (props) => {
   const [item, setItem] = useState(props.route.params.item);
   const [availability, setAvailability] = useState("");
@@ -31,6 +34,9 @@ const SingleProduct = (props) => {
             type="outline"
             disabled={item.countInStock <= 0}
             raised
+            onPress={() => {
+              props.addCart(item);
+            }}
             buttonStyle={{ borderColor: "white" }}
             titleStyle={{ color: "blue" }}
           />
@@ -71,4 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
 });
-export default SingleProduct;
+
+const mapDispatchToProps = (dispatch) => ({
+  addCart: (product) => dispatch(addCart({ quantity: 1, product })),
+});
+export default connect(null, mapDispatchToProps)(SingleProduct);
