@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, StyleSheet } from "react-native";
 import { Badge } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Icon } from "react-native-elements";
 
 //Stacks
 import HomeNavigator from "./HomeNavigator";
@@ -18,14 +18,17 @@ const Main = ({ cartItems }) => {
       initialRouteName="Home"
       screenOptions={{
         tabBarHideOnKeyboard: true,
-        tabBarActiveTintColor: "#e91e63",
+        tabBarActiveTintColor: "#f85e4a",
         tabBarShowLabel: false,
         tabBarStyle: [
           {
             display: "flex",
+            backgroundColor: "#f3f5f7",
+            borderRadius: 30,
           },
           null,
         ],
+        tabBarInactiveTintColor: "black",
       }}
     >
       <Tab.Screen
@@ -34,10 +37,11 @@ const Main = ({ cartItems }) => {
         options={{
           tabBarIcon: ({ color }) => (
             <Icon
-              name="home"
+              name="home-outline"
+              type="ionicon"
               style={{ position: "relative" }}
               color={color}
-              size={30}
+              size={25}
             />
           ),
           headerShown: false,
@@ -49,7 +53,12 @@ const Main = ({ cartItems }) => {
         options={{
           tabBarIcon: ({ color }) => (
             <>
-              <Icon name="shopping-cart" color={color} size={30} />
+              <Icon
+                name="cart-outline"
+                type="ionicon"
+                color={color}
+                size={25}
+              />
               <Badge
                 badgeStyle={styles.badge}
                 textStyle={styles.badgeText}
@@ -66,7 +75,12 @@ const Main = ({ cartItems }) => {
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="cog" color={color} size={30} />
+            <Icon
+              name="settings-outline"
+              type="ionicon"
+              color={color}
+              size={25}
+            />
           ),
           headerShown: false,
         }}
@@ -76,7 +90,12 @@ const Main = ({ cartItems }) => {
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="user" color={color} size={30} />
+            <Icon
+              name="person-outline"
+              type="ionicon"
+              color={color}
+              size={25}
+            />
           ),
           headerShown: false,
         }}
@@ -90,7 +109,7 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
   badgeText: {
-    color: "red",
+    color: "#f85e4a",
   },
 });
 const mapStateToProps = ({ cartItems }) => ({

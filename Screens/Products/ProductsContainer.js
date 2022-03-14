@@ -6,6 +6,7 @@ import {
   ActivityLoader,
   ScrollView,
   Dimensions,
+  Image,
 } from "react-native";
 import { SearchBar, Icon } from "react-native-elements";
 import Banner from "../../Shared/Banner";
@@ -74,21 +75,28 @@ const ProductsContainer = (props) => {
       {focus == true ? (
         <Icon name="history" type="font-awesome-5" onPress={handleClear} />
       ) : null}
-      <SearchBar
-        placeholder="search..."
-        placeholderTextColor="grey"
-        containerStyle={styles.searchContainer}
-        inputContainerStyle={styles.searchInputContainer}
-        inputStyle={styles.searchInput}
-        clearIcon={{ color: "red" }}
-        searchIcon={{
-          color: "grey",
-          iconStyle: { fontSize: 25, fontWeight: "bold" },
-        }}
-        value={search}
-        onChangeText={handleSearch}
-        onClear={handleClear}
-      />
+      <View style={styles.subContainer}>
+        <Image
+          style={styles.image}
+          resizeMode="contain"
+          source={require("../../assets/Shabab.png")}
+        />
+        <SearchBar
+          placeholder="..."
+          placeholderTextColor="#f3f5f7"
+          containerStyle={styles.searchContainer}
+          inputContainerStyle={styles.searchInputContainer}
+          inputStyle={styles.searchInput}
+          clearIcon={{ color: "red" }}
+          searchIcon={{
+            color: "#f3f5f7",
+            iconStyle: { fontSize: 25, fontWeight: "bold" },
+          }}
+          value={search}
+          onChangeText={handleSearch}
+          onClear={handleClear}
+        />
+      </View>
       {focus == true ? (
         <FilteredProducts
           productsFiltered={fiteredProducts}
@@ -137,7 +145,15 @@ const ProductsContainer = (props) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#f3f5f7",
+  },
+  subContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginTop: 10,
+
+    marginBottom: 10,
   },
   scroll: {
     width: width,
@@ -146,19 +162,17 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 10,
+    marginTop: 0,
   },
   searchContainer: {
-    width: width - 20,
-    borderRadius: 5,
+    width: width,
     padding: 0,
     marginTop: 0,
-    backgroundColor: "grey",
+    backgroundColor: "#f3f5f7",
     borderWidth: 1,
-    borderColor: "#f2f2f2",
-    borderBottomColor: "#f2f2f2",
-    borderTopColor: "#f2f2f2",
-    marginBottom: 5,
+    borderColor: "#f3f5f7",
+    borderBottomColor: "#f3f5f7",
+    borderTopColor: "#f3f5f7",
   },
   searchInputContainer: {
     backgroundColor: "white",
@@ -170,6 +184,10 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     fontSize: 20,
+  },
+  image: {
+    width: 50,
+    height: 50,
   },
 });
 

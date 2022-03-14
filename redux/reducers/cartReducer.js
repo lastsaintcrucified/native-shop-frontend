@@ -7,7 +7,7 @@ const cartRerducer = (state = [], action) => {
     case REMOVE_FROM_CART:
       return state.filter((cartItem) => cartItem !== action.payload);
     case CLEAR_CART:
-      return (state = []);
+      return [];
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { Text, ListItem, Avatar, Button, Icon } from "react-native-elements";
 import { SwipeListView } from "react-native-swipe-list-view";
@@ -81,6 +82,8 @@ const Cart = ({ cartItems, clearCart, removeFromCart, navigation }) => {
 
 const styles = StyleSheet.create({
   empty: {
+    marginTop: StatusBar.currentHeight + 60,
+
     height: height / 2,
     alignItems: "center",
     justifyContent: "center",

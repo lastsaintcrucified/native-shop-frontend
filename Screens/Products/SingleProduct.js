@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  StatusBar,
+} from "react-native";
 import { Text, Button } from "react-native-elements";
 let { width, height } = Dimensions.get("window");
 import { addCart } from "../../redux/actions/cartAction";
@@ -48,7 +55,7 @@ const SingleProduct = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: StatusBar.currentHeight + 60,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

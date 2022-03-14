@@ -10,8 +10,7 @@ LogBox.ignoreAllLogs(true);
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Header />
+      <NavigationContainer style={styles.container}>
         <Main />
       </NavigationContainer>
     </Provider>

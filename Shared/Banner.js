@@ -9,9 +9,9 @@ const Banner = () => {
 
   useEffect(() => {
     setBannerData([
-      "https://images.vexels.com/media/users/3/126443/preview2/ff9af1e1edfa2c4a46c43b0c2040ce52-macbook-pro-touch-bar-banner.jpg",
-      "https://pbs.twimg.com/media/D7P_yLdX4AAvJWO.jpg",
-      "https://www.yardproduct.com/blog/wp-content/uploads/2016/01/gardening-banner.jpg",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSinUPDDiVInN0K6dp5Z8dNJvm8KygLF7U6gA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZo3bqj5AVN8PtxLRolO8Zr-ZzcQGf7GMoA&usqp=CAU",
     ]);
 
     return () => {
@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
   },
   swiper: {
     width: width,
-    height: 200,
+    height: 140,
     marginTop: 0,
     padding: 0,
+    marginBottom: 20,
   },
 
   image: {

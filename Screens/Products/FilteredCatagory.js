@@ -19,8 +19,11 @@ const FilteredCatagory = ({
       <ScrollView bounces={true} horizontal={true}>
         <ListItem containerStyle={styles.list}>
           <Badge
-            status={active === -1 ? "warning" : "primary"}
+            status={active === -1 ? "" : "white"}
             value="All"
+            textStyle={
+              active === -1 ? { color: "#f85e4a" } : { color: "black" }
+            }
             onPress={() => {
               changeCatagory("all");
             }}
@@ -30,8 +33,11 @@ const FilteredCatagory = ({
             return (
               <Badge
                 key={index}
-                status={active === index ? "warning" : "primary"}
+                status={active === index ? "" : "white"}
                 value={cat.name}
+                textStyle={
+                  active === index ? { color: "#f85e4a" } : { color: "black" }
+                }
                 onPress={() => {
                   changeCatagory(cat._id.$oid);
                   setActive(index);
