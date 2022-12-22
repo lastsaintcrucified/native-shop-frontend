@@ -7,7 +7,7 @@ const FilteredProducts = ({ productsFiltered, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {productsFiltered.length > 0 ? (
           productsFiltered.map((item, index) => (
             <ListItem

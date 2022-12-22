@@ -16,36 +16,41 @@ const FilteredCatagory = ({
 }) => {
   return (
     <View style={styles.scroll}>
-      <ScrollView bounces={true} horizontal={true}>
+      <ScrollView
+        bounces={true}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+      >
         <ListItem containerStyle={styles.list}>
           <Badge
-            status={active === -1 ? "" : "white"}
+            status={active === -1 ? "success" : "warning"}
             value="All"
-            textStyle={
-              active === -1 ? { color: "#f85e4a" } : { color: "black" }
-            }
+            textStyle={active === -1 ? { color: "white" } : { color: "black" }}
             onPress={() => {
               changeCatagory("all");
             }}
             badgeStyle={styles.badge}
           />
-          {catagories.map((cat, index) => {
-            return (
-              <Badge
-                key={index}
-                status={active === index ? "" : "white"}
-                value={cat.name}
-                textStyle={
-                  active === index ? { color: "#f85e4a" } : { color: "black" }
-                }
-                onPress={() => {
-                  changeCatagory(cat._id.$oid);
-                  setActive(index);
-                }}
-                badgeStyle={styles.badge}
-              />
-            );
-          })}
+          {catagories &&
+            catagories.map((cat, index) => {
+              return (
+                <Badge
+                  key={index}
+                  status={active === index ? "success" : "warning"}
+                  value={cat?.name}
+                  textStyle={
+                    active === index
+                      ? { color: "white", fontSize: 14 }
+                      : { color: "black" }
+                  }
+                  onPress={() => {
+                    changeCatagory(cat?._id.$oid);
+                    setActive(index);
+                  }}
+                  badgeStyle={styles.badge}
+                />
+              );
+            })}
         </ListItem>
       </ScrollView>
     </View>
@@ -57,7 +62,8 @@ const styles = StyleSheet.create({
     width: width,
   },
   badge: {
-    padding: 15,
+    height: 23,
+    padding: 2,
   },
   list: {
     backgroundColor: "#f2f2f2",
